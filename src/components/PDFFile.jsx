@@ -37,20 +37,22 @@ const styles = StyleSheet.create({
   },
 })
 
-function PDFFile() {
+function PDFFile({ questions = [] }) {
   return (
     <Document>
       <Page style={styles.body}>
         <Text style={styles.header} fixed>
           ~ Maximum Marks : 100 ~
         </Text>
-        <Text style={styles.subtitle}>Question No: 1</Text>
 
-        <Text style={styles.question}>What is the speed of light? 5 Marks</Text>
-
-        <Text style={styles.subtitle}>Question No: 2</Text>
-
-        <Text style={styles.question}>What is the speed of light? 5 Marks</Text>
+        {questions.map(({ id, marks, question }, index) => (
+          <div key={id}>
+            <Text style={styles.subtitle}>Question No: {index + 1}</Text>
+            <Text style={styles.question}>
+              {question} {marks} Marks
+            </Text>
+          </div>
+        ))}
 
         <Text
           style={styles.pageNumber}
